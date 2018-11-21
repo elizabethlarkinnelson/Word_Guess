@@ -5,6 +5,12 @@
 <h1>Do you want to play?</h1>
 
 <div class="button_holder">
-    <input class="button" type="button" name="to_play" value="Yes">
-    <input class="button" type="button" name="to_play" value="No">
+    <form action="{% url 'hangman:play' %}" method="POST"}>
+        {% csrf_token %}
+        <input id="button_yes" type="submit" name="to_play" value="Yes">
+    </form>
+    <form action="{% url 'hangman:index' %}" method="POST"}>
+        {% csrf_token %}
+        <input id="button_no" type="submit" name="no_play" value="No">
+    </form>
 </div>
