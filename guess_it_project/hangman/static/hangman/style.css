@@ -7,3 +7,50 @@ h1 {
 .button_holder {
     text-align: center;
 }
+
+.wrapper {
+    overflow: hidden;
+    white-space: nowrap;
+    margin-top: 3em;
+}
+
+.inline {
+    display: inline-block;
+    font-size: 3em;
+}
+
+#image_one {
+    margin-bottom: 0;
+}
+
+#image_two {
+    display: inline-block;
+    margin-right: 1em;
+    margin-top: 0;
+}
+
+#image_three {
+    display: inline-block;
+    margin-left: 1em;
+    margin-top: 0;
+}
+
+.stand {
+    margin-left: 2.5em;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+#image_eight {
+    margin-bottom: 0;
+    padding-bottom: 0
+}
+
+#base {
+    margin-top: 0;
+    margin-left: 1em;
+    padding-top: 0;
+    line-height: 10px;
+}
+
+

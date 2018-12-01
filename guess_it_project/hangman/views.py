@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Word
 import requests
 import random
 
@@ -12,10 +13,13 @@ def play(request):
     response = requests.get('http://app.linkedin-reach.io/words?minLength=3&maxLength=10')
     words = response.text.splitlines()
 
-    length = len(words)
-    random_num = random.randint(0, length)
-
+    random_num = random.randint(0, len(words))
     word = words[random_num]
-    context = {'word': word}
+    length = [i for i in range(len(word))]
+
+    new_word = Word(current_word=word, guess_number=0, letters_left=''.join(sorted(word)))
+    new_word.save()
+
+    context = {'length': length}
 
     return render(request, 'hangman/play.html', context)
