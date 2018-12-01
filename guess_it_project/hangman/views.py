@@ -4,6 +4,11 @@ import random
 
 
 def index(request):
+    return render(request, 'hangman/index.html')
+
+
+def play(request):
+
     response = requests.get('http://app.linkedin-reach.io/words?minLength=3&maxLength=10')
     words = response.text.splitlines()
 
@@ -12,9 +17,5 @@ def index(request):
 
     word = words[random_num]
     context = {'word': word}
-    return render(request, 'hangman/index.html', context)
 
-
-def play(request):
-
-    return render(request, 'hangman/play.html')
+    return render(request, 'hangman/play.html', context)
