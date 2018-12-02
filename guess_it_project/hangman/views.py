@@ -20,7 +20,8 @@ def play(request):
     new_word = Word(current_word=word, guess_number=0, letters_left=''.join(sorted(word)))
     new_word.save()
 
-    context = {'length': length}
+    context = {'length': length,
+               'word': word}
 
     return render(request, 'hangman/play.html', context)
 
@@ -28,10 +29,16 @@ def play(request):
 def game(request):
 
     context = {}
-    success = 'success'
+    error = 'invalid input'
 
     if request.method == 'POST':
         guess = request.POST['guess']
-        context = {'success': success}
+        if guess.isalpha():
+            context = {'success': guess}
+        else:
+            context = {'error': error}
+
+    context['word'] = Word.objects.latest('id').current_word
+    context['length'] = [i for i in range(len(context['word']))]
 
     return render(request, 'hangman/game.html', context)
