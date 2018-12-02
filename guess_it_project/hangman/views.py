@@ -23,3 +23,15 @@ def play(request):
     context = {'length': length}
 
     return render(request, 'hangman/play.html', context)
+
+
+def game(request):
+
+    context = {}
+    success = 'success'
+
+    if request.method == 'POST':
+        guess = request.POST['guess']
+        context = {'success': success}
+
+    return render(request, 'hangman/game.html', context)
