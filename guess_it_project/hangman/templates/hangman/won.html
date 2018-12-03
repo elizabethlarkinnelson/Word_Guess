@@ -4,8 +4,8 @@
 
 <h1>You won <h1>
 <div class="play_again">
-    <form action="{% url 'hangman:play' %}" method="POST" id="retry_game">
+    <form action="{% url 'hangman:difficulty' %}" method="POST" id="retry_game">
         {% csrf_token %}
-        <input id="submit_guess" type="submit" name="play_again" value="play_again">
+        <input id="submit_guess" type="submit" name="play_again" value="Play Again!">
     </form>
 </div>

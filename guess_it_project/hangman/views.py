@@ -8,9 +8,17 @@ def index(request):
     return render(request, 'hangman/index.html')
 
 
+def difficulty(request):
+    return render(request, 'hangman/difficulty.html')
+
+
 def play(request):
 
-    response = requests.get('http://app.linkedin-reach.io/words?minLength=3&maxLength=6')
+    if request.method == 'POST':
+        difficulty = request.POST['difficulty']
+
+    response = requests.get('http://app.linkedin-reach.io/words?difficulty='
+                            + str(difficulty) + '&minLength=3&maxLength=6')
     words = response.text.splitlines()
 
     random_num = random.randint(0, len(words))

@@ -1,0 +1,24 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'hangman/style.css' %}">
+
+<h1> How difficult do you want your word? <h1>
+
+
+<div class="difficulty_button">
+    <form action="{% url 'hangman:play' %}" method="POST" id="difficulty">
+        {% csrf_token %}
+        <select name="difficulty" id="difficulty" onchange="this.form.submit()">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+    </form>
+</div>

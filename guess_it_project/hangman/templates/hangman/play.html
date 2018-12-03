@@ -2,7 +2,7 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'hangman/style.css' %}">
 
-<h1>You're playing!<h1>
+<h1> Guess a letter<h>
 
 <div id="image_one" class="hangman">____</div>
 <div id="image_two" class="hangman">|</div>
@@ -21,13 +21,11 @@
     {% for letter in length %}
     <div class="inline">_</div>
     {% endfor %}
-    {{word}}
 {% endif %}
 </div>
 
 
 <h1> You have 6 tries left.</h>
-<h1> Guess a letter.</h>
 
 <div class="guess_button">
     <form action="{% url 'hangman:game' %}" method="POST" id="post_guess">
@@ -37,22 +35,3 @@
     </form>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-
-<script type="text/javascript">
-
-    $(document).on('submit', '#post_guess'.function(e){
-        e.preventDefault();
-
-        $.ajax({
-            type:'POST',
-            url:'game/',
-            data:{
-                character:$('#guess').val(),
-            },
-            success:function(){
-
-            }
-        })
-    });
-</script>

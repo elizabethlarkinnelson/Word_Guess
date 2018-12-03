@@ -2,7 +2,7 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'hangman/style.css' %}">
 
-<h1>I got here <h1>
+<h1> You have {{guesses_left}} guesses left<h1>
 
 <div id="image_one" class="hangman">____</div>
 <div id="image_two" class="hangman">|</div>
@@ -66,6 +66,8 @@
 {% endif %}
 </div>
 
+
+
 <div class="guess_button">
     <form action="{% url 'hangman:game' %}" method="POST" id="post_guess">
         {% csrf_token %}
@@ -74,11 +76,4 @@
     </form>
 </div>
 
-<h1> You have {{guesses_left}} guesses left</h1>
-{% if right_letters %}
-    {{right_letters}}
-{% endif %}
 
-{% if letters_left %}
-    {{letters_left}}
-{% endif %}
