@@ -110,7 +110,7 @@ h1 {
 
 #leftright_arm {
     display: inline-block;
-    margin-right: 20px;
+    margin-right: 22px;
 }
 
 #left_arm {
@@ -118,8 +118,28 @@ h1 {
     margin-right: 20px
 }
 
+#extend_torso{
+    display: inline-block;
+}
 
+#torso_stand{
+    display: inline-block;
+    margin-right: 70px;
+    margin-left: 60px;
 
+}
+
+#left_leg{
+    display: inline-block;
+    margin: 0;
+
+}
+
+#left_leg_stand{
+    display: inline-block;
+    margin-right: 77px;
+    margin-left: 65px;
+}
 
 .stand {
     margin-left: 2.5em;

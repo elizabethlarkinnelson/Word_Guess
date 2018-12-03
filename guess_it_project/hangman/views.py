@@ -10,7 +10,7 @@ def index(request):
 
 def play(request):
 
-    response = requests.get('http://app.linkedin-reach.io/words?minLength=3&maxLength=10')
+    response = requests.get('http://app.linkedin-reach.io/words?minLength=3&maxLength=6')
     words = response.text.splitlines()
 
     random_num = random.randint(0, len(words))
@@ -42,7 +42,7 @@ def game(request):
             current_word.guess_number += 1
             current_word.save()
 
-            if guess in current_word.letters_left:
+            if guess in current_word.letters_left and current_word.guess_number < 6:
                 current_word.right_letters_guessed = current_word.right_letters_guessed + guess
                 current_word.save()
                 letters_left = []
@@ -58,6 +58,16 @@ def game(request):
                 context['right_letters'] = current_word.right_letters_guessed
                 context['letters_left'] = current_word.letters_left
                 context['wrong_guess'] = len(current_word.wrong_letters_guessed)
+
+                if current_word.letters_left == '':
+                    return render(request, 'hangman/won.html', context)
+
+            elif guess in current_word.letters_left and current_word.guess_number == 6:
+                if current_word.letters_left == guess:
+                    return render(request, 'hangman/won.html', context)
+
+            elif guess not in current_word.letters_left and current_word.guess_number > 5:
+                return render(request, 'hangman/loss.html', context)
 
             else:
                 current_word.wrong_letters_guessed = current_word.wrong_letters_guessed + guess
