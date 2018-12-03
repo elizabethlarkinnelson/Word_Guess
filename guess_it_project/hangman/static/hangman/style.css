@@ -73,11 +73,52 @@ h1 {
 
 #stand_image {
     display: inline-block;
+    margin-right: 72px;
+    margin-left: 25px;
 }
 
-#star {
+#torso {
     display: inline-block;
+    margin: 0;
+    margin-right: 35px;
 }
+
+#torso_rightarm{
+    display: inline-block;
+    margin-right: 20px;
+}
+
+#stand_image_rightarm{
+    display: inline-block;
+    margin-right: 70px;
+}
+
+#right_arm {
+    display: inline-block;
+    margin-right: 20px
+}
+
+#torso_leftrightarm{
+    display: inline-block;
+    margin-right: 20px;
+}
+
+#stand_image_leftrightarm{
+    display: inline-block;
+    margin-right: 110px;
+}
+
+#leftright_arm {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+#left_arm {
+    display: inline-block;
+    margin-right: 20px
+}
+
+
 
 
 .stand {
