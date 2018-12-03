@@ -45,58 +45,70 @@ def game(request):
     current_word = Word.objects.latest('id')
 
     if request.method == 'POST':
-        guess = request.POST['guess']
-        if guess.isalpha():
-            current_word.guess_number += 1
-            current_word.save()
-
-            if guess in current_word.letters_left and current_word.guess_number < 6:
-                current_word.right_letters_guessed = current_word.right_letters_guessed + guess
-                current_word.save()
-                letters_left = []
-                for let in current_word.letters_left:
-                    if let == guess:
-                        pass
-                    else:
-                        letters_left.append(let)
-                letters_left_string = ''.join(letters_left)
-                current_word.letters_left = letters_left_string
+        if 'guess' in request.POST:
+            guess = request.POST['guess']
+            if guess.isalpha():
+                current_word.guess_number += 1
                 current_word.save()
 
-                context['right_letters'] = current_word.right_letters_guessed
-                context['letters_left'] = current_word.letters_left
-                context['wrong_guess'] = len(current_word.wrong_letters_guessed)
+                if guess in current_word.letters_left and current_word.guess_number < 6:
+                    current_word.right_letters_guessed = current_word.right_letters_guessed + guess
+                    current_word.save()
+                    letters_left = []
+                    for let in current_word.letters_left:
+                        if let == guess:
+                            pass
+                        else:
+                            letters_left.append(let)
+                    letters_left_string = ''.join(letters_left)
+                    current_word.letters_left = letters_left_string
+                    current_word.save()
 
-                if current_word.letters_left == '':
-                    return render(request, 'hangman/won.html', context)
+                    context['right_letters'] = current_word.right_letters_guessed
+                    context['letters_left'] = current_word.letters_left
+                    context['wrong_guess'] = len(current_word.wrong_letters_guessed)
 
-            elif guess in current_word.letters_left and current_word.guess_number == 6:
-                if current_word.letters_left == guess:
-                    return render(request, 'hangman/won.html', context)
+                    if current_word.letters_left == '':
+                        return render(request, 'hangman/won.html', context)
 
-            elif guess not in current_word.letters_left and current_word.guess_number > 5:
-                return render(request, 'hangman/loss.html', context)
+                elif guess in current_word.letters_left and current_word.guess_number == 6:
+                    if current_word.letters_left == guess:
+                        return render(request, 'hangman/won.html', context)
 
-            elif guess not in current_word.letters_left and current_word.guess_number == 6:
-                return render(request, 'hangman/loss.html', context)
+                elif guess not in current_word.letters_left and current_word.guess_number > 5:
+                    return render(request, 'hangman/loss.html', context)
 
+                elif guess not in current_word.letters_left and current_word.guess_number == 6:
+                    return render(request, 'hangman/loss.html', context)
+
+                else:
+                    current_word.wrong_letters_guessed = current_word.wrong_letters_guessed + guess
+                    current_word.save()
+                    context['wrong_guess'] = len(current_word.wrong_letters_guessed)
             else:
-                current_word.wrong_letters_guessed = current_word.wrong_letters_guessed + guess
-                current_word.save()
-                context['wrong_guess'] = len(current_word.wrong_letters_guessed)
+                context = {'error': error}
+
+            word_guess = []
+
+            for let in current_word.current_word:
+                if let in current_word.right_letters_guessed:
+                    word_guess.append(let)
+                else:
+                    word_guess.append('_')
+            context['word_guess'] = word_guess
+
         else:
-            context = {'error': error}
+            word_guess = request.POST['word_guess']
+            if word_guess.strip() == current_word.current_word and current_word.guess_number < 7:
+                return render(request, 'hangman/won.html', context)
+            else:
+                current_word.guess_number += 1
+                current_word.save()
+
+                if current_word.guess_number == 6:
+                    return render(request, 'hangman/loss.html', context)
 
     context['guesses'] = current_word.guess_number
     context['guesses_left'] = 6 - context['guesses']
-
-    word_guess = []
-
-    for let in current_word.current_word:
-        if let in current_word.right_letters_guessed:
-            word_guess.append(let)
-        else:
-            word_guess.append('_')
-    context['word_guess'] = word_guess
 
     return render(request, 'hangman/game.html', context)

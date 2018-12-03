@@ -72,7 +72,15 @@
     <form action="{% url 'hangman:game' %}" method="POST" id="post_guess">
         {% csrf_token %}
         <input id="guess" type="text" maxlength="1" name="guess">
-        <input id="submit_guess" type="submit" name="submit_guess" value="submit">
+        <input id="submit_guess" type="submit" name="submit_guess" value="guess letter">
+    </form>
+</div>
+
+<div class="guess_word">
+    <form action= "{% url 'hangman:game' %}" method="POST" id="post_word">
+        {% csrf_token %}
+        <input id="word_guess" type="text" maxlength="11" name="word_guess">
+        <input id="submit_word" type="submit" name="submit_word" value="guess word">
     </form>
 </div>
 
