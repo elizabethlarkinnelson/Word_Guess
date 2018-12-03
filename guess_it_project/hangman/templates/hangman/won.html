@@ -1,0 +1,11 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'hangman/style.css' %}">
+
+<h1>You won <h1>
+<div class="play_again">
+    <form action="{% url 'hangman:play' %}" method="POST" id="retry_game">
+        {% csrf_token %}
+        <input id="submit_guess" type="submit" name="play_again" value="play_again">
+    </form>
+</div>
