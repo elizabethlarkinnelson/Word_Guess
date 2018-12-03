@@ -46,10 +46,8 @@ def game(request):
                 current_word.right_letters_guessed = current_word.right_letters_guessed + guess
                 current_word.save()
                 letters_left = []
-                count = 0
                 for let in current_word.letters_left:
-                    if let == guess and count == 0:
-                        count += 1
+                    if let == guess:
                         pass
                     else:
                         letters_left.append(let)
@@ -62,12 +60,21 @@ def game(request):
 
             else:
                 current_word.wrong_letters_guessed = current_word.wrong_letters_guessed + guess
+                current_word.save()
+                context['wrong_guess'] = len(current_word.wrong_letters_guessed)
         else:
             context = {'error': error}
 
     context['guesses'] = current_word.guess_number
     context['guesses_left'] = 6 - context['guesses']
-    context['word'] = current_word.current_word
-    context['length'] = [i for i in range(len(context['word']))]
+
+    word_guess = []
+
+    for let in current_word.current_word:
+        if let in current_word.right_letters_guessed:
+            word_guess.append(let)
+        else:
+            word_guess.append('_')
+    context['word_guess'] = word_guess
 
     return render(request, 'hangman/game.html', context)
