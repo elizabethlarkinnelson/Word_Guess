@@ -57,6 +57,7 @@ def game(request):
 
                 context['right_letters'] = current_word.right_letters_guessed
                 context['letters_left'] = current_word.letters_left
+                context['wrong_guess'] = len(current_word.wrong_letters_guessed)
 
             else:
                 current_word.wrong_letters_guessed = current_word.wrong_letters_guessed + guess
