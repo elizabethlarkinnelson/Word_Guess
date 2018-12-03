@@ -69,6 +69,9 @@ def game(request):
             elif guess not in current_word.letters_left and current_word.guess_number > 5:
                 return render(request, 'hangman/loss.html', context)
 
+            elif guess not in current_word.letters_left and current_word.guess_number == 6:
+                return render(request, 'hangman/loss.html', context)
+
             else:
                 current_word.wrong_letters_guessed = current_word.wrong_letters_guessed + guess
                 current_word.save()
