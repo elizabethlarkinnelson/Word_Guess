@@ -70,8 +70,10 @@
     {% if wrong_letters_guessed %}
     <div class="wrong_letters">{{wrong_letters_guessed}}</div>
     {% endif %}
-    {% if wrong_words_guess %}
-    <div class="wrong_words>">{{wrong_words_guess}}</div>
+    {% if wrong_words_guessed %}
+        {% for wrong_word in wrong_words_guessed %}
+            <div class="wrong_words>">{{wrong_word}}</div>
+        {% endfor %}
     {% endif %}
 </div>
 
