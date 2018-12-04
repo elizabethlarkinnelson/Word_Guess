@@ -56,11 +56,9 @@
             <div id="left_leg_stand">|</div>
         </div>
     {% endif %}
-
     <div id="image_eight" class="hangman">|</div>
 </div>
 <div id="base" class="hangman">_______</div>
-
 <div class="wrapper">
     {% if word_guess %}
         {% for letter in word_guess %}
@@ -68,33 +66,32 @@
         {% endfor %}
     {% endif %}
 </div>
-
-<div class="wrong_guesses">
-    {% if wrong_letters_guessed %}
-        <div class="wrong_letters">{{wrong_letters_guessed}}</div>
-    {% endif %}
-    {% if wrong_words_guessed %}
-        {% for wrong_word in wrong_words_guessed %}
-            <div class="wrong_words>">{{wrong_word}}</div>
-        {% endfor %}
-    {% endif %}
-</div>
-
-
 <div class="guess_button">
     <form action="{% url 'hangman:game' %}" method="POST" id="post_guess">
         {% csrf_token %}
         <input id="guess" type="text" maxlength="1" name="guess">
-        <input id="submit_guess" type="submit" name="submit_guess" value="guess letter">
+        <input id="submit_guess" type="submit" name="submit_guess" value="Guess A Letter">
     </form>
 </div>
-
 <div class="guess_word">
     <form action= "{% url 'hangman:game' %}" method="POST" id="post_word">
         {% csrf_token %}
         <input id="word_guess" type="text" maxlength="11" name="word_guess">
-        <input id="submit_word" type="submit" name="submit_word" value="guess word">
+        <input id="submit_word" type="submit" name="submit_word" value="Guess A Word">
     </form>
+</div>
+<div class="wrong_guesses">
+    {% if wrong_letters_guessed %}
+        <div id="incorrect_guesses">Incorrect Guesses:</div>
+        <div class="wrong_letters">{{wrong_letters_guessed}}</div>
+    {% endif %}
+    {% if wrong_words_guessed %}
+        <div class="incorrect_words">
+        {% for wrong_word in wrong_words_guessed %}
+            {{wrong_word}}
+        {% endfor %}
+        </div>
+    {% endif %}
 </div>
 
 

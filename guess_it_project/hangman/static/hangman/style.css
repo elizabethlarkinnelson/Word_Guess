@@ -4,10 +4,6 @@ h1 {
     margin-top: 20px;
 }
 
-#six_guesses {
-    font-size: 30px;
-}
-
 .button_holder {
     text-align: center;
 }
@@ -15,7 +11,7 @@ h1 {
 .wrapper {
     overflow: hidden;
     white-space: nowrap;
-    margin-top: 1em;
+    margin-top: 0.5em;
 }
 
 .inline {
@@ -161,6 +157,30 @@ h1 {
     margin-left: 1em;
     padding-top: 0;
     line-height: 10px;
+}
+
+.guess_button {
+  margin: 0;
+  padding: 0;
+}
+
+.guess_word {
+  margin: 0;
+  padding: 0;
+}
+
+#post_guess {
+  margin: 0;
+  padding: 0;
+}
+
+#post_word {
+  margin: 0;
+  padding: 0;
+}
+
+.incorrect_words {
+  display: inline-block;
 }
 
 
