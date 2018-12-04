@@ -111,4 +111,10 @@ def game(request):
     context['guesses'] = current_word.guess_number
     context['guesses_left'] = 6 - context['guesses']
 
+    if current_word.wrong_letters_guessed:
+        context['wrong_letters_guessed'] = current_word.wrong_letters_guessed
+
+    if current_word.wrong_words_guessed:
+        context['wrong_words_guessed'] = current_word.wrong_words_guessed
+
     return render(request, 'hangman/game.html', context)

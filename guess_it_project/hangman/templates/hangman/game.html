@@ -66,6 +66,14 @@
 {% endif %}
 </div>
 
+<div class="wrong_guesses">
+    {% if wrong_letters_guessed %}
+    <div class="wrong_letters">{{wrong_letters_guessed}}</div>
+    {% endif %}
+    {% if wrong_words_guess %}
+    <div class="wrong_words>">{{wrong_words_guess}}</div>
+    {% endif %}
+</div>
 
 
 <div class="guess_button">
