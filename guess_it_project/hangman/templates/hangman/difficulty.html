@@ -9,6 +9,7 @@
     <form action="{% url 'hangman:play' %}" method="POST" id="difficulty">
         {% csrf_token %}
         <select name="difficulty" id="difficulty" onchange="this.form.submit()">
+            <option value="choose">Choose A Level</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>

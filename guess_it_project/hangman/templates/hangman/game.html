@@ -15,6 +15,9 @@
     {% if wrong_guess == 0 %}
         <div id="image_four" class="hangman">|</div>
     {% endif %}
+    {% if wrong_guess == 1 %}
+        <div id="image_four" class="hangman">|</div>
+    {% endif %}
     {% if wrong_guess == 2 %}
     <div class="body">
         <div id="torso">|</div>
@@ -59,16 +62,16 @@
 <div id="base" class="hangman">_______</div>
 
 <div class="wrapper">
-{% if word_guess %}
-    {% for letter in word_guess %}
-    <div class="inline">{{letter}}</div>
-    {% endfor %}
-{% endif %}
+    {% if word_guess %}
+        {% for letter in word_guess %}
+        <div class="inline">{{letter}}</div>
+        {% endfor %}
+    {% endif %}
 </div>
 
 <div class="wrong_guesses">
     {% if wrong_letters_guessed %}
-    <div class="wrong_letters">{{wrong_letters_guessed}}</div>
+        <div class="wrong_letters">{{wrong_letters_guessed}}</div>
     {% endif %}
     {% if wrong_words_guessed %}
         {% for wrong_word in wrong_words_guessed %}
